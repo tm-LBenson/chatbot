@@ -38,6 +38,33 @@
         align-items: center;
       }
     </style>
+    <style>
+      #loader {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .loader {
+        margin-top: 10px;
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -51,7 +78,12 @@
         id="user-input"
         placeholder="Type your message here..."
       />
-      <div id="button-here"></div>
+      <div id="button-here">
+        <div id="loader">
+          <p>Connecting to AI...</p>
+          <div class="loader"></div>
+        </div>
+      </div>
     </div>
 
     <script type="importmap">
@@ -90,6 +122,7 @@
         button.textContent = 'Send';
         button.onclick = sendMessage;
         document.getElementById('button-here').appendChild(button);
+        document.getElementById('loader').style.display = 'none';
         async function sendMessage() {
           const inputElement = document.getElementById('user-input');
           const userInput = inputElement.value;
